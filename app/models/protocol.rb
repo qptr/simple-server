@@ -3,6 +3,8 @@ class Protocol < ApplicationRecord
 
   has_many :facility_groups
 
+  has_one :protocol_drug_calculation_coefficient
+
   before_create :assign_id
 
   validates :name, presence: true
