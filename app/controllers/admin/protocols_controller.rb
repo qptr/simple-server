@@ -43,19 +43,11 @@ class Admin::ProtocolsController < AdminController
   end
 
   def configure_coefficients
-    @coefficients = ProtocolDrugCalculationCoefficient.find_by(protocol_params[:id]).coefficients
-    if @coefficients.absent?
-      @coefficients = {
-        "load_coefficient": 0,
-      }
-      categories = Set.new
-      @protocol.protocol_drugs.each do |drug|
-        @coefficients[drug[:rxnorm_code]] = 0
-        categories.add(drug[:drug_category])
-      end
-      categories.each do |category|
-        @coefficients[category] = 0
-      end
+    authorize { current_admin.accessible_organizations(:manage).any? }
+    @coefficients = ProtocolDrugCalculationCoefficient.find(protocol_params[:protocol_id]).coefficients
+    # should be able to just do this with new i think. check later
+    if @coefficients.blank?
+      @coefficients = ProtocolDrugCalculationCoefficient.new
     end
   end
 
@@ -74,6 +66,6 @@ class Admin::ProtocolsController < AdminController
   end
 
   def protocol_params
-    params.require(:protocol).permit(:name, :follow_up_days)
+    params.require(:protocol).permit(:name, :follow_up_days, :protocol_id)
   end
 end

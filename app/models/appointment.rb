@@ -86,6 +86,9 @@ class Appointment < ApplicationRecord
     [0, (scheduled_date - device_created_at.to_date).to_i].max
   end
 
+  def protocol_id
+
+  end
   def scheduled?
     status.to_sym == :scheduled
   end

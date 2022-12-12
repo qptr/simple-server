@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :protocols
   resources :home
 
   devise_scope :email_authentication do

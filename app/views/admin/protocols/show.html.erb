@@ -11,6 +11,7 @@
   <nav class="page-nav">
     <% if current_admin.accessible_organizations(:manage).any? || current_admin.power_user? %>
       <%= link_to "Edit medication list", edit_admin_protocol_path(@protocol), class: "btn btn-sm btn-outline-primary", id: "Edit medication list" %>
+      <%= link_to "Configure medication list", admin_protocol_configure_path(@protocol), class: "btn btn-sm btn-outline-primary", id: "Configure medication" %>
       <%= link_to new_admin_protocol_protocol_drug_path(@protocol), class: "btn btn-sm btn-success", id: "Add medication" do %>
         <i class="fas fa-plus mr-1"></i> Medication
       <% end %>
