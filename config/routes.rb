@@ -245,7 +245,9 @@ Rails.application.routes.draw do
 
     resources :patient_imports, only: [:new, :create]
 
-    resources :protocols do
+    resources :protocols do # map get /configure to configure_coeffs and post /configure to submit_coeffs
+      get "/configure", to: "protocols#configure_coefficients"
+      post "/configure", to: "protocols#submit_coefficients"
       resources :protocol_drugs
     end
 

@@ -63,7 +63,7 @@ class Admin::ProtocolsController < AdminController
     if @coefficients.save
       redirect_to [:admin, @coefficients], notice: "Medication list was successfully configured"
     else
-      render :configure_coefficients # renders with errors poopulated
+      render :configure_coefficients
     end
   end
 

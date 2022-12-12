@@ -1495,6 +1495,38 @@ CREATE TABLE public.prescription_drugs (
 
 
 --
+-- Name: protocol_drug_calculation_coefficients; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.protocol_drug_calculation_coefficients (
+    id bigint NOT NULL,
+    protocol_id uuid,
+    coefficients json,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: protocol_drug_calculation_coefficients_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.protocol_drug_calculation_coefficients_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: protocol_drug_calculation_coefficients_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.protocol_drug_calculation_coefficients_id_seq OWNED BY public.protocol_drug_calculation_coefficients.id;
+
+
+--
 -- Name: protocol_drugs; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -4502,6 +4534,13 @@ ALTER TABLE ONLY public.passport_authentications ALTER COLUMN id SET DEFAULT nex
 
 
 --
+-- Name: protocol_drug_calculation_coefficients id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.protocol_drug_calculation_coefficients ALTER COLUMN id SET DEFAULT nextval('public.protocol_drug_calculation_coefficients_id_seq'::regclass);
+
+
+--
 -- Name: treatment_group_memberships id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -4825,6 +4864,14 @@ ALTER TABLE ONLY public.phone_number_authentications
 
 ALTER TABLE ONLY public.prescription_drugs
     ADD CONSTRAINT prescription_drugs_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: protocol_drug_calculation_coefficients protocol_drug_calculation_coefficients_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.protocol_drug_calculation_coefficients
+    ADD CONSTRAINT protocol_drug_calculation_coefficients_pkey PRIMARY KEY (id);
 
 
 --
@@ -6490,6 +6537,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20221010104304'),
 ('20221011064211'),
 ('20221011071921'),
-('20221011124316');
+('20221011124316'),
+('20221208101407');
 
 
